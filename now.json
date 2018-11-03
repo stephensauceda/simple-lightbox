@@ -1,0 +1,8 @@
+{
+  "alias": "keatons-lightbox.now.sh",
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@now/static" },
+    { "src": "assets/**/**", "use": "@now/static" }
+  ]
+}
