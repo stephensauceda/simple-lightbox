@@ -43,18 +43,6 @@
   }
 
   /**
-   * Creates the overlay as soon as the script is loaded
-   */
-  function createOverlay() {
-    // create the overlay element
-    var overlay = document.createElement('div');
-    // give is a class
-    overlay.classList.add('sms-lightbox-overlay');
-    // stick it in the <body>
-    document.body.appendChild(overlay);
-  }
-
-  /**
    * Takes an src and returns an img element ready to be appended to the DOM
    */
   function createBigImage(source) {
@@ -101,13 +89,28 @@
     document.removeEventListener('click', closeLightboxHandler);
   }
 
+  /**
+   * Creates the overlay as soon as the script is loaded
+   */
+  function createOverlay() {
+    // create the overlay element
+    var overlay = document.createElement('div');
+    // give is a class
+    overlay.classList.add('sms-lightbox-overlay');
+    // stick it in the <body>
+    document.body.appendChild(overlay);
+  }
+
   function preloadImages() {
     // create an array from all the thunbmnails
     var thumbnails = Array.prototype.slice.call(document.querySelectorAll('.sms-lightbox'));
     // convert to a list of big images
-    thumbnails.map(function(thumb) {
+    thumbnails.forEach(function(thumb) {
+      // get big image source
+      var bigSrc = getSrcForBigImage(thumb.getAttribute('src'))
+      // create a new image
       var image = new Image();
-      image.src = getSrcForBigImage(thumb.getAttribute('src'));
+      image.src = bigSrc;
       return image;
     });
   }
