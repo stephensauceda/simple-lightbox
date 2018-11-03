@@ -1,6 +1,7 @@
 (function () {
   // create a placeholder for our overlay before anything
   createOverlay();
+  preloadImages();
   // add an event listener for all elements
   document.addEventListener('click', lightboxClickHandler);
 
@@ -98,5 +99,16 @@
     document.body.style.overflow = 'auto';
     // remove the listener since the overlay is now hidden
     document.removeEventListener('click', closeLightboxHandler);
+  }
+
+  function preloadImages() {
+    // create an array from all the thunbmnails
+    var thumbnails = Array.prototype.slice.call(document.querySelectorAll('.sms-lightbox'));
+    // convert to a list of big images
+    thumbnails.map(function(thumb) {
+      var image = new Image();
+      image.src = getSrcForBigImage(thumb.getAttribute('src'));
+      return image;
+    });
   }
 })();
